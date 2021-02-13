@@ -1,6 +1,6 @@
 # online-coffee
-this repo will have a simple coffee reservation system
-******************************************************
+this repo will have a simple coffee reservation system ,we depend on a free source for admin layout ,[AdminLTE.io]
+***************************************************************************************************
 let's build online reservation for a take way coffee shop
 ******************************************************
 
@@ -38,10 +38,14 @@ Technologies Used :
 **********************
 . MySQL DB
 **********
+. EJS engine
+************
 . Sequelize
 ***********
 . socket.io
 ***********
+. Redis for sessions
+********************
 
 Client Side
 ------
