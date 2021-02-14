@@ -1,0 +1,25 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <h3> <%= page_title %> </h3>
+        <div class="clearfix"></div>
+        <form method="POST">
+            <div class="form-group col-md-6">
+                <label> Flavor Name </label>
+                <input required name="flavor_name" class="form-control" value="<%= model.flavor_name %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Extra Price </label>
+                <input required name="extra_price" class="form-control" value="<%= model.extra_price %>"/>
+            </div>
+            <div class="form-group col-md-12">
+                <button class="btn btn-info">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+    </script>
+<%- include('../partials/master-part-3.ejs') %>

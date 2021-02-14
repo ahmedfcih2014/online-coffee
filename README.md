@@ -21,14 +21,12 @@ Workflow :
 
 Admin Dashboard :
 ---------------
-. ability to edit or delete a user & view him reservations
-**********************************************************
-. manage sizes & flavors
+. manage sizes & flavors [done]
 ************************
-. manage reservations
-*********************
-. reservation approval & rejection
-**********************************
+. ability to edit or delete a user & view him reservations [paging here]
+***********
+. manage reservations : reservation approval & rejection [paging here]
+***********
 
 Technologies Used :
 ------------------

@@ -1,0 +1,44 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <h3> <%= page_title %> </h3>
+        <a href="<%= current_uri %>/create" class="btn btn-success pull-right" style="margin-bottom: 5px;">
+            <i class="fa fa-plus"></i> Create
+        </a>
+        <div class="clearfix"></div>
+        <% if (success != undefined && success != '') { %>
+            <div class="alert alert-success"> <%= success %> </div>
+        <% } %>
+        <% if (error != undefined && error != '') { %>
+            <div class="alert alert-danger"> <%= error %> </div>
+        <% } %>
+        <table class="table table-responsive table-bordered table-striped" style="margin-top: 5px;">
+            <thead>
+                <tr>
+                    <th> Flavor Name </th>
+                    <th> Extra Price </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% flavors.forEach(flavor => { %>
+                    <tr>
+                        <td> <%= flavor.flavor_name %> </td>
+                        <td> <%= flavor.extra_price %> </td>
+                        <td>
+                            <a href="<%= current_uri %>/edit/<%= flavor.id %>" class="btn btn-info">
+                                <i class="fa fa-edit"></i>
+                            </a>
+                            <a href="<%= current_uri %>/delete/<%= flavor.id %>" class="btn btn-danger">
+                                <i class="fa fa-trash-o"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+    </script>
+<%- include('../partials/master-part-3.ejs') %>

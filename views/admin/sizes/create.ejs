@@ -1,0 +1,25 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <h3> <%= page_title %> </h3>
+        <div class="clearfix"></div>
+        <form method="POST">
+            <div class="form-group col-md-6">
+                <label> Size Name </label>
+                <input required name="size_name" class="form-control"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Extra Price </label>
+                <input required name="extra_price" class="form-control"/>
+            </div>
+            <div class="form-group col-md-12">
+                <button class="btn btn-primary">
+                    Create
+                </button>
+            </div>
+        </form>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+    </script>
+<%- include('../partials/master-part-3.ejs') %>
