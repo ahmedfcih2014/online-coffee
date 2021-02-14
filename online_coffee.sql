@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `admin`
+-- Table structure for table `admins`
 --
 
-CREATE TABLE `admin` (
+CREATE TABLE `admins` (
   `id` int(11) NOT NULL,
   `name` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -106,9 +106,9 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `admin`
+-- Indexes for table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -146,11 +146,12 @@ ALTER TABLE `users`
 --
 
 --
--- AUTO_INCREMENT for table `admin`
+-- AUTO_INCREMENT for table `admins`
 --
-ALTER TABLE `admin`
+ALTER TABLE `admins`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
+ALTER TABLE `admins` ADD UNIQUE `username_unique` (`username`);
 --
 -- AUTO_INCREMENT for table `coffee_reservations`
 --

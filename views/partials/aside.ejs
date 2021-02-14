@@ -16,7 +16,8 @@
                 </a>
             </li>
             <li class="header">CMS</li>
-            <li class="treeview" style="height: auto;">
+            <li class="treeview <%= uri_group == 'sub-menu' ? 'active' : '' %>"
+                style="height: auto;">
                 <a href="#">
                     <i class="fa fa-suitcase"></i> <span>Sub Menu</span>
                     <span class="pull-right-container">
@@ -32,7 +33,7 @@
                 </ul>
             </li>
             <li class="header">Admin</li>
-            <li>
+            <li class=" <%= current_uri == '/admin/profile' ? 'active' : '' %>">
                 <a href="/admin/profile">
                     <i class="fa fa-user"></i> <span>My Profile</span>
                 </a>
