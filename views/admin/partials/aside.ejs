@@ -15,7 +15,7 @@
                     <i class="fa fa-line-chart"></i> <span>Statistics</span>
                 </a>
             </li>
-            <li class="header"><i class="fa fa-coffee"></i> Coffee Part</li>
+            <li class="header"><i class="fa fa-cogs"></i> Management</li>
             <li class="treeview <%= uri_group == 'coffee-part' ? 'active' : '' %>"
                 style="height: auto;">
                 <a href="#">
@@ -33,6 +33,27 @@
                     <li class="<%= current_uri == '/admin/sizes' ? 'active' : '' %>">
                         <a href="/admin/sizes">
                             <i class="fa fa-bolt"></i> Sizes
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview <%= uri_group == 'users-part' ? 'active' : '' %>"
+                style="height: auto;">
+                <a href="#">
+                    <i class="fa fa-users"></i> <span>Users Part</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="<%= current_uri == '/admin/users' ? 'active' : '' %>">
+                        <a href="/admin/users">
+                            <i class="fa fa-users"></i> Users
+                        </a>
+                    </li>
+                    <li class="<%= current_uri == '/admin/reservations' ? 'active' : '' %>">
+                        <a href="/admin/reservations">
+                            <i class="fa fa-calendar"></i> Reservations
                         </a>
                     </li>
                 </ul>

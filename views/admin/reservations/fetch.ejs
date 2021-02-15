@@ -1,0 +1,95 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <div class="col-md-12">
+            <h3> <%= page_title %> </h3>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <h4> Reservation Details </h4>
+            <div class="form-group col-md-6">
+                <label> User Name </label>
+                <input disabled class="form-control" value="<%= model.user?.name %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> User Phone </label>
+                <input disabled class="form-control" value="<%= model.user?.phone %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> User Status </label>
+                <input disabled class="form-control" value="<%= model.user?.status %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Reservation Amount </label>
+                <input disabled class="form-control" value="<%= model.amount %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Reservation Status </label>
+                <input disabled class="form-control" value="<%= model.status %>"/>
+            </div>
+            <div class="form-group col-md-6">
+                <label> Number Of Cups </label>
+                <input disabled class="form-control" value="<%= model.number_of_cups %>"/>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="col-md-12">
+                <h4> Cups Details </h4>
+                <table class="table table-responsive table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th> Size </th>
+                            <th> Size Extra Price </th>
+                            <th> Flavor </th>
+                            <th> Flavor Extra Price </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% model.coffee_reservations_cups.forEach(cup => { %>
+                            <tr>
+                                <td> <%= cup.cup_size?.size_name %> </td>
+                                <td> <%= cup.cup_size_price %> </td>
+                                <td> <%= cup.cup_flavor?.flavor_name %> </td>
+                                <td> <%= cup.cup_flavor_price %> </td>
+                            </tr>
+                        <% }) %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr>
+        <div class="clearfix"></div>
+        <div class="col-md-6">
+            <form action="<%= current_uri + '/reject/' + model.id%>" method="POST">
+                <div class="form-group">
+                    <label> Rejection Comment </label>
+                    <textarea required class="form-control" placeholder="Rejection comment here"
+                        name="comment"><%= model.comment %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger">
+                        Reject Reservation
+                    </button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <form action="<%= current_uri + '/approve/' + model.id%>" method="POST">
+                <div class="form-group">
+                    <label> Approval Comment </label>
+                    <textarea class="form-control" placeholder="Approval comment here"
+                        name="comment"><%= model.comment %></textarea>
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-success">
+                        Approve Reservation
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+    </script>
+<%- include('../partials/master-part-3.ejs') %>

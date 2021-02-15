@@ -5,6 +5,8 @@ import Statistics from '../../controllers/admin/Statistics.js'
 
 import flavors from './flavors.js'
 import sizes from './sizes.js'
+import users from './users.js'
+import reservations from './reservations.js'
 
 const router = express.Router()
 
@@ -20,5 +22,7 @@ router.get('/statistics' ,middlewares.is_admin_auth ,Statistics.index)
 
 router.use('/flavors' ,flavors)
 router.use('/sizes' ,sizes)
+router.use('/users' ,users)
+router.use('/reservations' ,reservations)
 
 export default router

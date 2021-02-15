@@ -1,0 +1,64 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <h3> <%= page_title %> </h3>
+        <%- include('../partials/index-pagination.ejs') %>
+        <div class="clearfix"></div>
+        <% if (success != undefined && success != '') { %>
+            <div class="alert alert-success"> <%= success %> </div>
+        <% } %>
+        <% if (error != undefined && error != '') { %>
+            <div class="alert alert-danger"> <%= error %> </div>
+        <% } %>
+        <table class="table table-responsive table-bordered table-striped" style="margin-top: 5px;">
+            <thead>
+                <tr>
+                    <th> User Name </th>
+                    <th> User Phone </th>
+                    <th> Amount </th>
+                    <th> # Cups </th>
+                    <th> Status </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% reservations.forEach(reservation => { %>
+                    <tr>
+                        <td> <%= reservation.user?.name %> </td>
+                        <td> <%= reservation.user?.phone %> </td>
+                        <td> <%= reservation.amount %> </td>
+                        <td> <%= reservation.number_of_cups %> </td>
+                        <td>
+                            <% if (reservation.status == 'pending') { %>
+                                <label class="label label-warning">
+                                    <%= reservation.status %>
+                                </label>
+                            <% } else if (reservation.status == 'rejected') { %>
+                                <label class="label label-danger">
+                                    <%= reservation.status %>
+                                </label>
+                            <% } else { %>
+                                <label class="label label-success">
+                                    <%= reservation.status %>
+                                </label>
+                            <% } %>
+                         </td>
+                        <td>
+                            <a class="btn btn-success" href="<%= current_uri + '/'+ reservation.id %>">
+                                <i class="fa fa-eye"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+        $(document).on('change' ,'select.limit-select' ,function () {
+            const limit = $(this).find('option:selected').val(),
+                page = '<%= page %>' ,uri = '<%= current_uri %>'
+            window.location = `${uri}?page=${page}&limit=${limit}`
+        })
+    </script>
+<%- include('../partials/master-part-3.ejs') %>

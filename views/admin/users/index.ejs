@@ -1,0 +1,64 @@
+<%- include('../partials/master-part-1.ejs') %>
+    <div class="col-md-12 box">
+        <h3> <%= page_title %> </h3>
+        <%- include('../partials/index-pagination.ejs') %>
+        <div class="clearfix"></div>
+        <% if (success != undefined && success != '') { %>
+            <div class="alert alert-success"> <%= success %> </div>
+        <% } %>
+        <% if (error != undefined && error != '') { %>
+            <div class="alert alert-danger"> <%= error %> </div>
+        <% } %>
+        <table class="table table-responsive table-bordered table-striped" style="margin-top: 5px;">
+            <thead>
+                <tr>
+                    <th> ID </th>
+                    <th> Name </th>
+                    <th> Phone </th>
+                    <th> Status </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                    <tr>
+                        <td> <%= user.id %> </td>
+                        <td> <%= user.name %> </td>
+                        <td> <%= user.phone %> </td>
+                        <td> <%= user.status %> </td>
+                        <td>
+                            <% if(user.status == 'blocked') { %>
+                                <a href="<%= current_uri %>/active/<%= user.id %>"
+                                    class="btn btn-success" title="Active User">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                            <% } else { %>
+                                <a href="<%= current_uri %>/block/<%= user.id %>"
+                                    class="btn btn-warning" title="Block User">
+                                    <i class="fa fa-ban"></i>
+                                </a>
+                            <% } %>
+                            <a href="/admin/reservations/fetch/<%= user.id %>"
+                                class="btn btn-info" title="User Reservations">
+                                <i class="fa fa-calendar"></i>
+                            </a>
+                            <a href="<%= current_uri %>/delete/<%= user.id %>"
+                                class="btn btn-danger" title="Delete User">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+<%- include('../partials/master-part-2.ejs') %>
+	<script>
+        // custom js here
+        $(document).on('change' ,'select.limit-select' ,function () {
+            const limit = $(this).find('option:selected').val(),
+                page = '<%= page %>' ,uri = '<%= current_uri %>'
+            window.location = `${uri}?page=${page}&limit=${limit}`
+        })
+    </script>
+<%- include('../partials/master-part-3.ejs') %>

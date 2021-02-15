@@ -1,5 +1,5 @@
 <nav aria-label="Page navigation example">
-    <ul class="pagination">
+    <ul class="pagination pull-right">
         <% pages.forEach(page => { %>
             <li class="page-item <%= page.is_active ? 'active' : '' %> <%= page.disable ? ' disabled' : '' %>">
                 <a class="page-link"
@@ -8,6 +8,10 @@
                 </a>
             </li>
         <% }) %>
-        
     </ul>
+    <select class="limit-select pull-right">
+        <option <%= limit != undefined && limit == 10 ? 'selected' : '' %> value="10"> 10 </option>
+        <option <%= limit != undefined && limit == 25 ? 'selected' : '' %> value="25"> 25 </option>
+        <option <%= limit != undefined && limit == 50 ? 'selected' : '' %> value="50"> 50 </option>
+    </select>
 </nav>

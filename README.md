@@ -23,9 +23,11 @@ Admin Dashboard :
 ---------------
 . manage sizes & flavors [done]
 ************************
-. ability to edit or delete a user & view him reservations [paging here]
+. ability to approve , block or delete a user & view him reservations [paging here] [done]
 ***********
-. manage reservations : reservation approval & rejection [paging here]
+. manage reservations : reservation approval & rejection [paging here] [done]
+***********
+. notification for comming reservations
 ***********
 
 Technologies Used :
