@@ -6,11 +6,11 @@ let's build online reservation for a take way coffee shop
 
 Workflow :
 ---------------
-. user able to register an account [name ,phone & password]
+. user able to register an account [name ,phone & password] [done]
 ******************************************************
-. user able to login by phone & password
+. user able to login by phone & password [done]
 ****************************************
-. user enter a web page after login
+. user enter a web page after login [done]
 ***********************************
 . user fill a form [arival date & time , number of cups he need {cup size & flavor}]
 ************************************************************************************

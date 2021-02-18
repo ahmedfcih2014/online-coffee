@@ -46,6 +46,6 @@ app.use(
 app.use(flash({ sessionKeyName: 'flashMessage' }))
 
 app.use('/admin' ,admin_routes)
-app.get('/' ,front_end_routes)
+app.use('/' ,front_end_routes)
 
 app.listen(config.port ,config.host ,() => console.log(`Runing at http://${config.host}:${config.port}`))

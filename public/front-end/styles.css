@@ -1,0 +1,26 @@
+body{
+    background-image: url(./coffee-bg.jpg);
+}
+
+.login-area{
+    width: 400px;
+    background-color: #945536;
+    color: white;
+    padding: 30px 50px;
+    border-radius: 5px;
+    margin: 100px 0 0 100px;
+}
+
+.login-area .form-group{
+    margin-top: 20px;
+}
+
+.login-area button {
+    background-color: #2c0603;
+    border: none
+}
+
+.login-area button:hover ,.login-area a ,.login-area a:hover {
+    background-color: #542d29;
+    border: none
+}

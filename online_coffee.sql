@@ -184,6 +184,8 @@ ALTER TABLE `users`
 
 ALTER TABLE `coffee_reservations` ADD `comment` VARCHAR(255) NULL DEFAULT NULL AFTER `number_of_cups`;
 
+ALTER TABLE `online_coffee`.`users` ADD UNIQUE `unique_phone` (`phone`);
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

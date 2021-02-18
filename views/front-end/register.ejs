@@ -1,0 +1,31 @@
+<%- include('./partials/part-1.ejs') %>
+    <div class="login-area">
+        <form method="POST" action="/register">
+            <% if (errors != undefined) { %>
+                <% errors.forEach(error_div => { %>
+                    <%- error_div %>
+                <% }) %>
+            <% } %>
+            <div class="form-group">
+                <label> Name </label>
+                <input class="form-control" placeholder="Enter Your Name" name="name"/>
+            </div>
+            <div class="form-group">
+                <label> Phone </label>
+                <input class="form-control" placeholder="Enter Your Phone" name="phone"/>
+            </div>
+            <div class="form-group">
+                <label> Password </label>
+                <input class="form-control" placeholder="Enter Your Password" name="password" type="password"/>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary"> Register </button>
+                <a class="btn btn-primary" href="/login"> Or Login </a>
+            </div>
+        </form>
+    </div>
+<%- include('./partials/part-2.ejs') %>
+    <script>
+        // custom js here
+    </script>
+<%- include('./partials/part-3.ejs') %>
