@@ -186,6 +186,11 @@ ALTER TABLE `coffee_reservations` ADD `comment` VARCHAR(255) NULL DEFAULT NULL A
 
 ALTER TABLE `online_coffee`.`users` ADD UNIQUE `unique_phone` (`phone`);
 
+ALTER TABLE `coffee_reservations`
+  ADD `arrival_date` DATE NULL DEFAULT NULL AFTER `comment`,
+  ADD `arrival_time` VARCHAR(100) NULL DEFAULT NULL AFTER `arrival_date`;
+
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

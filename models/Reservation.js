@@ -22,6 +22,14 @@ const Reservation = Config.define('coffee_reservation' ,{
     comment: {
         type: DataTypes.TEXT,
         allowNull: true
+    },
+    arrival_date: {
+        type: DataTypes.DATE,
+        allowNull: true
+    },
+    arrival_time: {
+        type: DataTypes.STRING,
+        allowNull: true
     }
 } ,{
     timestamps: false

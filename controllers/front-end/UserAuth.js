@@ -34,4 +34,8 @@ export default {
         await req.flash(created ? 'success' : 'error' ,created ? 'Your account created ,login' : 'Please enter other phone')
         res.redirect('/login')
     },
+    logout: async (req ,res) => {
+        req.session.user = undefined
+        res.redirect('/login')
+    }
 }

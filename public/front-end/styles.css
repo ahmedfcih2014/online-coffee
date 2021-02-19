@@ -2,6 +2,14 @@ body{
     background-image: url(./coffee-bg.jpg);
 }
 
+.limit-select{
+     margin: 0 10px;
+     height: 38px;
+     width: 50px;
+     border-radius: 5px;
+     border: none;
+}
+
 .login-area{
     width: 400px;
     background-color: #945536;
@@ -23,4 +31,25 @@ body{
 .login-area button:hover ,.login-area a ,.login-area a:hover {
     background-color: #542d29;
     border: none
+}
+
+div.home-page {
+    margin: 25px;
+    padding: 25px;
+    border-radius: 5px;
+    background-color: white;
+    width: 600px;
+}
+
+div#home-tabs {
+    margin-top: 20px;
+}
+
+div.row {
+    margin-top: 10px;
+}
+
+div.x{
+    font-weight: bold;
+    font-size: 20px;
 }

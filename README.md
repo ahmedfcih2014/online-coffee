@@ -12,7 +12,7 @@ Workflow :
 ****************************************
 . user enter a web page after login [done]
 ***********************************
-. user fill a form [arival date & time , number of cups he need {cup size & flavor}]
+. user fill a form [arival date & time , number of cups he need {cup size & flavor}] [done]
 ************************************************************************************
 . admin will get a real time notification with form filled [he can approve or reject and set his comment]
 *********************************************************************************************************

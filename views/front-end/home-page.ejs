@@ -1,7 +1,290 @@
 <%- include('./partials/part-1.ejs') %>
-    <h3> Just Home Page </h3>
+    <div class="home-page">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="my-reservations-tab" data-bs-toggle="tab"
+                    data-bs-target="#my-reservations" type="button" role="tab" aria-controls="my-reservations"
+                    aria-selected="true">
+                    My Reservations
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="new-reservations-tab" data-bs-toggle="tab"
+                    data-bs-target="#new-reservations" type="button" role="tab" aria-controls="new-reservations"
+                    aria-selected="true">
+                    New Reservations
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="notifications-tab" data-bs-toggle="tab"
+                    data-bs-target="#notifications" type="button" role="tab" aria-controls="notifications"
+                    aria-selected="true">
+                    Notifications
+                </button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link">
+                    <a href="/logout">
+                        Logout
+                    </a>
+                </button>
+            </li>
+        </ul>
+        <div class="tab-content" id="home-tabs">
+            <div class="tab-pane fade show active" id="my-reservations" role="tabpanel" aria-labelledby="my-reservations-tab">
+                <div class="table-responsive">
+                    <%- include('../admin/partials/index-pagination.ejs') %>
+                    <table class="table table-striped table-bordered">
+                        <thead>
+                            <tr>
+                                <th> Amount </th>
+                                <th> Status </th>
+                                <th> # Cups </th>
+                                <th> <i class="fa fa-eye"></i> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% reservations.forEach(reservation => { %>
+                                <tr class="reservation-<%= reservation.id %>">
+                                    <td> <%= reservation.amount %> </td>
+                                    <td class="status"> <%= reservation.status.toUpperCase() %> </td>
+                                    <td> <%= reservation.number_of_cups %> </td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="show_me('<%= reservation.id %>')">
+                                            <i class="fa fa-eye"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            <% } ) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="new-reservations" role="tabpanel" aria-labelledby="new-reservations-tab">
+                <div id="error-area"></div>
+                <form action="/reserve" id="reserve-form" method="POST">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Arrival Date </label>
+                                <input class="form-control" type="date" name="arrival_date" placeholder="YYYY-MM-DD"/>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label> Arrival Time </label>
+                                <input class="form-control" type="time" name="arrival_time" placeholder="HH:MM"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="cups-area">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Size </label>
+                                    <select required name="cups[0][size]" class="form-control select2">
+                                        <option value=""> Select Size </option>
+                                        <% sizes.forEach(size => { %>
+                                            <option data-extra-price="<%= size.extra_price %>" value="<%= size.id %>"> <%= size.size_name %> </option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Flavor </label>
+                                    <select required name="cups[0][flavor]" class="form-control select2">
+                                        <option value=""> Select Flavor </option>
+                                        <% flavors.forEach(flavor => { %>
+                                            <option data-extra-price="<%= flavor.extra_price %>" value="<%= flavor.id %>"> <%= flavor.flavor_name %> </option>
+                                        <% }) %>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <button type="button" class="btn btn-info" onclick="add_a_cup()"> <i class="fa fa-plus"></i> Cup </button>
+                            <button type="button" class="btn btn-primary" onclick="do_reserve()"> Save </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
+                notifications will be here
+            </div>
+        </div>
+    </div>
+    <div style="display: none;" id="cup-example">
+        <div class="row">
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label> Size </label>
+                    <select required name="size-name-here" class="form-control select2">
+                        <option value=""> Select Size </option>
+                        <% sizes.forEach(size => { %>
+                            <option data-extra-price="<%= size.extra_price %>" value="<%= size.id %>"> <%= size.size_name %> </option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <div class="form-group">
+                    <label> Flavor </label>
+                    <select required name="flavor-name-here" class="form-control select2">
+                        <option value=""> Select Flavor </option>
+                        <% flavors.forEach(flavor => { %>
+                            <option data-extra-price="<%= flavor.extra_price %>" value="<%= flavor.id %>"> <%= flavor.flavor_name %> </option>
+                        <% }) %>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="form-group">
+                    <label> Remove </label>
+                    <button class="btn btn-danger" onclick="remove_my_parent(event)">
+                        <i class="fa fa-times" onclick="remove_my_parent(event ,true)"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 <%- include('./partials/part-2.ejs') %>
     <script>
         // custom js here
+        function add_a_cup() {
+            const rand = Math.ceil(Math.random() * 1000000)
+            let row_html = $("#cup-example").html()
+            row_html = row_html.replace('size-name-here' ,'cups['+rand+'][size]')
+            row_html = row_html.replace('flavor-name-here' ,'cups['+rand+'][flavor]')
+            $("#cups-area").append(row_html)
+        }
+
+        function remove_my_parent(event ,child = undefined) {
+            if (child) $(event.target).parent().parent().parent().parent().remove()
+            else $(event.target).parent().parent().parent().remove()
+        }
+
+        function do_reserve() {
+            $('#error-area').html('')
+            const form = $("#reserve-form"),
+                data = form.serialize(),
+                method = form.attr('method'),
+                action = form.attr('action')
+            $.ajax({
+                dataType: 'json',
+                data: data,
+                type: method,
+                url: action,
+                success: function (response) {
+                    alert(response.message)
+                    window.location = response.location
+                },
+                error: function (error) {
+                    $('#error-area').html(error.responseJSON.messages.join(''))
+                }
+            })
+        }
+
+        function show_me(id) {
+            $.ajax({
+                dataType: 'json',
+                type: 'GET',
+                url: '/my-reservations/'+id,
+                success: function (response) {
+                    let html_content = `
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Total Amount </label>
+                                    <input class="form-control" disabled value="${response.amount}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label> Status </label>
+                                    <input class="form-control" disabled value="${response.status.toUpperCase()}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5">
+                                <div class="form-group">
+                                    <label> Arrival Date </label>
+                                    <input class="form-control" disabled value="${response.arrival_date}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label> Arrival Time </label>
+                                    <input class="form-control" disabled value="${response.arrival_time}"/>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label> # Cups </label>
+                                    <input class="form-control" disabled value="${response.number_of_cups}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" style="margin-top: 15px">
+                            <table class="table tabe-responsive table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th> # </th>
+                                        <th> Size </th>
+                                        <th> Flavor </th>
+                                        <th> Cost </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                    `
+                    let counter = 1
+                    response.coffee_reservations_cups.forEach(cup => {
+                        html_content += `
+                            <tr>
+                                <td> ${counter} </td>
+                                <td> ${cup.cup_size?.size_name} </td>
+                                <td> ${cup.cup_flavor?.flavor_name} </td>
+                                <td> ${cup.cup_size_price + cup.cup_flavor_price} </td>
+                            </tr>
+                        `
+                        counter++
+                    })
+                    html_content += '</table></div>'
+                    if (response.comment) {
+                        html_content += `
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label> Shop Comment : </label>
+                                        <textarea class="form-control" disabled rows="4">${response.comment}</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        `
+                    }
+                    $("#exampleModal .modal-body").html(html_content)
+                    $("#exampleModal").modal('show')
+                }
+            })
+        }
     </script>
 <%- include('./partials/part-3.ejs') %>
