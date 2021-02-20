@@ -3,6 +3,7 @@ import expressSession from 'express-session'
 import redis from 'redis'
 import connectRedis from 'connect-redis'
 import {flash} from 'express-flash-message'
+import { Server } from 'socket.io'
 
 import admin_routes from './routes/admin/index.js'
 import front_end_routes from './routes/front-end/index.js'
@@ -48,4 +49,27 @@ app.use(flash({ sessionKeyName: 'flashMessage' }))
 app.use('/admin' ,admin_routes)
 app.use('/' ,front_end_routes)
 
-app.listen(config.port ,config.host ,() => console.log(`Runing at http://${config.host}:${config.port}`))
+const web_server = app.listen(
+    config.port ,config.host ,() => console.log(`Runing at http://${config.host}:${config.port}`)
+)
+
+const socket_server = new Server(web_server)
+
+const clients = new Map
+
+socket_server.on('connection' ,socket => {
+    socket.on('user-reservation' ,data => {
+        socket_server.emit('user-reservation' ,data)
+    })
+
+    socket.on('set-my-id' ,data => {
+        clients.set(data.id ,socket.id)
+    })
+
+    socket.on('notify-user' ,data => {
+        socket
+        .broadcast
+        .to(clients.get(data.user_id))
+        .emit('reservation-changed' ,{message: data.message ,id: data.id ,status: data.status ,type: data.type})
+    })
+})

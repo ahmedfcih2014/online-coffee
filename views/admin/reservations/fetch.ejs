@@ -67,7 +67,7 @@
                         name="comment"><%= model.comment %></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-danger">
+                    <button class="btn btn-danger" onclick="declined()">
                         Reject Reservation
                     </button>
                 </div>
@@ -81,7 +81,7 @@
                         name="comment"><%= model.comment %></textarea>
                 </div>
                 <div class="form-group">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" onclick="approved()">
                         Approve Reservation
                     </button>
                 </div>
@@ -91,5 +91,24 @@
 <%- include('../partials/master-part-2.ejs') %>
 	<script>
         // custom js here
+        function  approved() {
+            notify_user(
+                '<%= model.user?.id %>',
+                'Reservation at <%= model.arrival_date %> <%= model.arrival_time %> has been approved',
+                '<%= model.id %>',
+                'success',
+                'APPROVED'
+            )
+        }
+
+        function  declined() {
+            notify_user(
+                '<%= model.user?.id %>',
+                'Reservation at <%= model.arrival_date %> <%= model.arrival_time %> has been rejected',
+                '<%= model.id %>',
+                'warning',
+                'REJECTED'
+            )
+        }
     </script>
 <%- include('../partials/master-part-3.ejs') %>

@@ -1,3 +1,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://use.fontawesome.com/000d63590c.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.socket.io/3.1.1/socket.io.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script>
+    const socket = io()
+    socket.emit('set-my-id' ,{id: '<%= user_id %>'})
+
+    function reserve_notify_admin(options) {
+        socket.emit('user-reservation' ,{
+            message: options.message ? options.message : 'Hey there im just try to reserve',
+            reserve_number: options.reserve_id ? options.reserve_id : -1
+        })
+    }
+
+    socket.on('reservation-changed' ,data => {
+        console.log(data)
+        swal(data.type.toUpperCase() ,data.message ,data.type).then(acc => {
+            $("#reservation-" + data.id).find('td.status').text(data.status)
+        })
+    })
+</script>

@@ -4,7 +4,7 @@ import UserModel from '../../models/User.js'
 export default {
     login: async (req ,res) => {
         const errors = await req.consumeFlash('errors') ,success = await req.consumeFlash('success') ,error = await req.consumeFlash('error')
-        res.render('front-end/login' ,{errors ,success ,error})
+        res.render('front-end/login' ,{errors ,success ,error ,user_id: undefined})
     },
     postLogin: async (req ,res) => {
         const user = await UserModel.findAll({where: {phone: req.body.phone}})
@@ -21,7 +21,7 @@ export default {
     },
     register: async (req ,res) => {
         const errors = await req.consumeFlash('errors')
-        res.render('front-end/register' ,{errors})
+        res.render('front-end/register' ,{errors ,user_id: undefined})
     },
     postRegister: async (req ,res) => {
         const hashedPass = await bcrypt.hash(req.body.password ,10)

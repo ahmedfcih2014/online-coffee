@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                             <% reservations.forEach(reservation => { %>
-                                <tr class="reservation-<%= reservation.id %>">
+                                <tr id="reservation-<%= reservation.id %>">
                                     <td> <%= reservation.amount %> </td>
                                     <td class="status"> <%= reservation.status.toUpperCase() %> </td>
                                     <td> <%= reservation.number_of_cups %> </td>
@@ -195,6 +195,10 @@
                 url: action,
                 success: function (response) {
                     alert(response.message)
+                    reserve_notify_admin({
+                        reserve_id: response.id,
+                        message: response.admin_message
+                    })
                     window.location = response.location
                 },
                 error: function (error) {

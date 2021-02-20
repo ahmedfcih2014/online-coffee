@@ -14,9 +14,7 @@ Workflow :
 ***********************************
 . user fill a form [arival date & time , number of cups he need {cup size & flavor}] [done]
 ************************************************************************************
-. admin will get a real time notification with form filled [he can approve or reject and set his comment]
-*********************************************************************************************************
-. after admin action user notified with admin action [approved or rejected]
+. after admin action user notified with admin action [approved or rejected] [done]
 ***************************************************************************
 
 Admin Dashboard :
@@ -27,8 +25,14 @@ Admin Dashboard :
 ***********
 . manage reservations : reservation approval & rejection [paging here] [done]
 ***********
-. notification for comming reservations
+. notification for comming reservations [done]
 ***********
+
+Todo :
+-----
+. notifications stored in DB
+**** Admin
+**** User
 
 Technologies Used :
 ------------------

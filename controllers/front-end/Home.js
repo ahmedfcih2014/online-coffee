@@ -40,7 +40,9 @@ export default {
             reservations = data.rows,
             sizes = await Size.findAll(),
             flavors = await Flavor.findAll()
-        res.render('front-end/home-page' ,{reservations ,pages ,limit ,page ,sizes ,flavors})
+        res.render('front-end/home-page' ,{
+            reservations ,pages ,limit ,page ,sizes ,flavors ,user_id: req.session.user.id
+        })
     },
     fetch_reservation: async (req ,res) => {
         res.send(await Reservations.findByPk(req.params.id ,{
@@ -73,6 +75,11 @@ export default {
         }
         Cups.bulkCreate(cups)
         await reservation.update({amount ,number_of_cups})
-        res.send({message: 'Your reservation sent to our Shop wait for our response' ,location: '/'})
+        res.send({
+            message: 'Your reservation sent to our Shop wait for our response',
+            location: '/',
+            id: reservation.id,
+            admin_message: `New reservation at ${reservation.arrival_date}`
+        })
     }
 }
