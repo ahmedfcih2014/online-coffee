@@ -41,7 +41,7 @@ export default {
             sizes = await Size.findAll(),
             flavors = await Flavor.findAll()
         res.render('front-end/home-page' ,{
-            reservations ,pages ,limit ,page ,sizes ,flavors ,user_id: req.session.user.id
+            reservations ,pages ,limit ,page ,sizes ,flavors ,user_id: req.session.user.id ,user: req.session.user
         })
     },
     fetch_reservation: async (req ,res) => {

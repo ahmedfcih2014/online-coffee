@@ -45,5 +45,6 @@ router.post(
 )
 router.get('/my-reservations/:id' ,Home.fetch_reservation)
 router.get('/logout' ,UserAuth.logout)
+router.post('/profile' ,UserAuth.update_profile)
 
 export default router

@@ -16,10 +16,10 @@
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="notifications-tab" data-bs-toggle="tab"
-                    data-bs-target="#notifications" type="button" role="tab" aria-controls="notifications"
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+                    data-bs-target="#profile" type="button" role="tab" aria-controls="profile"
                     aria-selected="true">
-                    Notifications
+                    Profile
                 </button>
             </li>
             <li class="nav-item">
@@ -111,8 +111,24 @@
                     </div>
                 </form>
             </div>
-            <div class="tab-pane fade" id="notifications" role="tabpanel" aria-labelledby="notifications-tab">
-                notifications will be here
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <form method="POST" action="/profile">
+                    <div class="form-group">
+                        <label> Name </label>
+                        <input required name="name" class="form-control" value="<%= user.name %>"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Phone </label>
+                        <input required name="phone" class="form-control" value="<%= user.phone %>"/>
+                    </div>
+                    <div class="form-group">
+                        <label> Password </label>
+                        <input type="password" name="password" class="form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-info"> Update Profile </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

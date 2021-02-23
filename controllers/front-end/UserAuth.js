@@ -34,6 +34,17 @@ export default {
         await req.flash(created ? 'success' : 'error' ,created ? 'Your account created ,login' : 'Please enter other phone')
         res.redirect('/login')
     },
+    update_profile: async (req ,res) => {
+        const data = req.body
+        if (data.password == '') delete data.password
+        else {
+            data.password = await bcrypt.hash(data.password ,10)
+        }
+        const model = await UserModel.findByPk(req.session.user.id)
+        let updated = undefined
+        if (model) updated = await model.update(data)
+        return updated ? res.redirect('/logout') : res.redirect('back')
+    },
     logout: async (req ,res) => {
         req.session.user = undefined
         res.redirect('/login')

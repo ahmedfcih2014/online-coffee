@@ -64,7 +64,7 @@
                 <div class="form-group">
                     <label> Rejection Comment </label>
                     <textarea required class="form-control" placeholder="Rejection comment here"
-                        name="comment"><%= model.comment %></textarea>
+                        id="reject-comment" name="comment"><%= model.comment %></textarea>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-danger" onclick="declined()">
@@ -102,13 +102,15 @@
         }
 
         function  declined() {
-            notify_user(
-                '<%= model.user?.id %>',
-                'Reservation at <%= model.arrival_date %> <%= model.arrival_time %> has been rejected',
-                '<%= model.id %>',
-                'warning',
-                'REJECTED'
-            )
+            if ($("#reject-comment").val()) {
+                notify_user(
+                    '<%= model.user?.id %>',
+                    'Reservation at <%= model.arrival_date %> <%= model.arrival_time %> has been rejected',
+                    '<%= model.id %>',
+                    'warning',
+                    'REJECTED'
+                )
+            }
         }
     </script>
 <%- include('../partials/master-part-3.ejs') %>
